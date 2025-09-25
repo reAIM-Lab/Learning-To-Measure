@@ -1,0 +1,70 @@
+experiment: sim
+data_dir: ./data/files/
+data_seed: 123
+verbose: False
+feature_dim: 10
+downstream_task: "regression"
+label_dim: 1
+
+task: regression
+batch_size: 8
+num_points: 500
+d_model: 256
+emb_depth: 4
+pred_depth: 1
+nhead: 4
+dim_feedforward: 512
+num_layers: 6
+dropout: 0
+bound_std: True
+lr: 0.0001
+num_steps: 100000
+num_warmup_steps: 500
+checkpoint_interval: 500
+train_seed: 42
+embed: set
+
+temp: 0.1
+temp_decay: False
+lr_selector: 0.0001
+lr_backbone: 0.00001
+batch_size_afa: 8
+num_steps_afa: 100000
+num_steps_afa_warmup: 500
+scheduler_afa: None
+from_checkpoint: True
+freeze_encoder: False
+afa_training_strategy: sequential
+inner_loop_steps: 1
+buffer_size: 1
+entropy_weight: 0
+checkpoint_interval_afa: 200
+
+eval_kernel: matern
+eval_seed: 42
+eval_batch_size: 200
+eval_data_dir: ./data/eval
+log_dir: ./logs/sim_{feature_dim}_{num_points}/
+
+test_points: 250
+test_num_batches: 200
+test_num_batches_afa: 100
+test_num_batches_bench_afa: 100
+test_seed: 123
+test_context_lengths: [50, 100, 200, 500, 900]
+test_missingness_rates: [0.0, 0.5, 0.75, 1.0]
+test_subgroups: [1, 2, 3]
+test_min_informative: 5
+
+num_gpus: 1
+nn_hidden_dim: 64
+nn_dropout: 0.2
+lr_baseline: 0.001
+nepochs_baseline: 200
+batch_size_baseline: 64
+val_frac_baseline: 0.2
+lr_gdfs: 0.0005
+nepochs_gdfs: 50
+train_predictor_gdfs: False
+temp_gdfs: 0.5
+log_progress: False
