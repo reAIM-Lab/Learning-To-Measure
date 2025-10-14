@@ -2,7 +2,6 @@ import torch
 import pandas as pd
 import numpy as np
 from pathlib import Path
-import xgboost as xgb
 from src.data.data_utils import TabularDataset, preprocess_df
 
 
@@ -19,32 +18,6 @@ def load_miniboone_data(config):
 
     # Get feature names from processed dataframe
     feature_list = list(df.drop(columns=['Outcome']).columns)
-
-    if config['feature_selection']:
-        X = df.drop(columns=['Outcome']).values
-        y = df['Outcome'].values
-        
-        # Create and train XGBoost model
-        xgb_model = xgb.XGBClassifier(
-            n_estimators=100,
-            learning_rate=0.1,
-            max_depth=5,
-            random_state=42,
-            use_label_encoder=False,
-            eval_metric='logloss'
-        )
-        xgb_model.fit(X, y)
-
-        # Get feature importance scores
-        importance_scores = xgb_model.feature_importances_
-        
-        # Create list of (feature, importance) tuples and sort by importance
-        feature_importance = list(zip(feature_list, importance_scores))
-        feature_importance.sort(key=lambda x: x[1], reverse=True)
-
-        print("\nTop features from XGBoost:")
-        for feat, imp in feature_importance:
-            print(f"{feat}: {imp:.4f}")
     
     # Convert dataframe to tensor
     label = torch.tensor(df['Outcome'].values, dtype=torch.float32)

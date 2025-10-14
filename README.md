@@ -3,13 +3,11 @@
 Code for reproducing Learning-To-Measure: In-Context Active Feature Acquisition
 
 ## Install
+We recommend using Conda with the provided `environment.yml` file.
 
 ```bash
-pip install .
+conda env create -f environment.yml
 ```
-
-## Data
-
 
 ## Quickstart
 
@@ -23,4 +21,10 @@ Once the predictor is trained, pretrain the policy on synthetic tasks:
 
 ```bash
 python main.py --experiment sim --mode train_afa
+```
+
+Evaluate acquisition performance:
+
+```bash
+python main.py --experiment sim --mode test_afa
 ```

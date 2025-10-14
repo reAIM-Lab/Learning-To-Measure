@@ -40,7 +40,7 @@ buffer_size: 1
 entropy_weight: 0
 checkpoint_interval_afa: 200
 
-eval_kernel: matern
+eval_kernel: rbf
 eval_seed: 42
 eval_batch_size: 200
 eval_data_dir: ./data/eval

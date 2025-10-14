@@ -178,7 +178,7 @@ class LTM(TNP):
         new_batch['rt'] = batch['rt']
         new_batch['maskt'] = batch['maskt']
 
-        z_target = self.encode(batch, autoreg=False)
+        z_target = self.encode(new_batch, autoreg=False)
         out = self.predictor(z_target)
         
         if self.task == 'regression':
